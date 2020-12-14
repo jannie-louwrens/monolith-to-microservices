@@ -1,0 +1,31 @@
+<div class="card border-primary">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    Categories
+    <button type="button" class="btn btn-primary" [routerLink]="['add']"
+      *ngIf="(user$ | async)?.isAdministrator">Create Category</button>
+  </div>
+  <div class='card-body' *ngIf="categoryTree$ | async as categoryTree">
+    <tree-root #tree [nodes]="categoryTree" [options]="options" (activate)="onSelected($event)" (initialized)="tree.treeModel.expandAll()">
+      <ng-template #treeNodeWrapperTemplate let-node let-index="index">
+        <div class="node-wrapper" [style.padding-left]="node.getNodePadding()">
+          <div class="text-primary" (click)="node.toggleExpanded()" *ngIf="node?.data?.children?.length > 0">
+            <fa-icon *ngIf="node?.isCollapsed" [icon]="['far', 'folder']"></fa-icon>
+            <fa-icon *ngIf="node?.isExpanded" [icon]="['far', 'folder-open']"></fa-icon>
+          </div>
+          <div class="node-content-wrapper"
+               [class.node-content-wrapper-active]="node.isActive"
+               [class.node-content-wrapper-focused]="node.isFocused"
+               (click)="node.mouseAction('click', $event)"
+               (dblclick)="node.mouseAction('dblClick', $event)"
+               (contextmenu)="node.mouseAction('contextMenu', $event)"
+               (treeDrop)="node.onDrop($event)"
+               [treeAllowDrop]="node.allowDrop"
+               [treeDrag]="node"
+               [treeDragEnabled]="node.allowDrag()">
+            {{ node.data.name }}
+          </div>
+        </div>
+      </ng-template>
+    </tree-root>
+  </div>
+</div>

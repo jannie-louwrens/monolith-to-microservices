@@ -1,0 +1,13 @@
+<div class="modal-header bg-primary">
+  <h4 class="modal-title text-white">Are you sure?</h4>
+</div>
+<div class="modal-body d-flex justify-content-between align-items-center">
+  <fa-icon [icon]="['far', 'question-circle']" size="5x" class="mr-2 text-info"></fa-icon>
+  <div class="modal-text">
+    <p>The form has not been submitted yet, do you really want to leave the page?</p>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" (click)="action(false)">No</button>
+  <button class="btn btn-primary right" (click)="action(true)">Yes</button>
+</div>

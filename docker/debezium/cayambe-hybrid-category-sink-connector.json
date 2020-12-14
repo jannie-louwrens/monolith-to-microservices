@@ -1,0 +1,25 @@
+{
+    "name": "cayambe-hybrid-category-sink-connector",
+    "config": {
+        "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+        "tasks.max": "1",
+        "topics": "category",
+        "connection.url": "jdbc:mysql://mysql:3306/cayambe_hybrid",
+        "connection.user": "cayambe-hybrid",
+        "connection.password": "cayambe",
+        "table.name.format": "cayambe_hybrid.category",
+        "transforms": "unwrap,RenameKey,FieldList",
+        "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+        "transforms.unwrap.drop.tombstones": "false",
+        "transforms.RenameKey.type": "org.apache.kafka.connect.transforms.ReplaceField$Key",
+        "transforms.RenameKey.renames": "id:category_id",
+        "transforms.FieldList.type": "org.apache.kafka.connect.transforms.ReplaceField$Value",
+        "transforms.FieldList.whitelist": "category_id,name,header,visible,image",
+        "auto.create": "false",
+        "auto.evolve": "false",
+        "insert.mode": "upsert",
+        "delete.enabled": "true",
+        "pk.mode": "record_key",
+        "pk.fields": "category_id"
+    }
+}

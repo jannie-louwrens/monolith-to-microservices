@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="card border-primary">
+    <div class="card-header">Update Category Information</div>
+
+    <div class="card-body" *ngIf="categoryForm">
+      <form novalidate (ngSubmit)="saveCategory()" [formGroup]="categoryForm">
+
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="categoryName">Category Name</label>
+          <div class="col-md-8">
+            <input class="form-control"
+                  id="categoryName"
+                  type="text"
+                  placeholder="Name (required)"
+                  formControlName="name"
+                  autocomplete="off"
+                  [ngClass]="{'is-invalid': (categoryForm.get('name').touched ||
+                                              categoryForm.get('name').dirty) &&
+                                              !categoryForm.get('name').valid }" />
+            <span class="invalid-feedback">
+              <span *ngIf="categoryForm.get('name').errors?.required">
+                Please enter the category name.
+              </span>
+              <span *ngIf="categoryForm.get('name').errors?.minlength">
+                The category name must be at least 3 characters long.
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label" for="parent">Parent Category</label>
+          <div class="col-md-8">
+            <select class="form-control"
+                    id="parent"
+                    required
+                    formControlName="parent"
+                    [ngClass]="{'is-invalid': (categoryForm.get('parent').touched ||
+                                              categoryForm.get('parent').dirty) &&
+                                              !categoryForm.get('parent').valid }">
+              <option value="null" disabled selected hidden>Parent (required)</option>
+              <option *ngFor="let category of categories" [ngValue]="category.id">
+                {{category.name}}
+              </option>
+            </select>
+            <span class="invalid-feedback">
+              <span *ngIf="categoryForm.get('parent').errors?.required">
+                A parent category must be selected.
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group row mb-2">
+          <div class="offset-md-2 col-md-4">
+            <button class="btn btn-primary mr-3"
+                    style="width:80px;"
+                    type="submit"
+                    [title]="categoryForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                    [disabled]="!categoryForm.valid">
+              Save
+            </button>
+            <button class="btn btn-outline-secondary mr-3"
+                    style="width:80px;"
+                    type="button"
+                    title="Cancel your edits"
+                    [routerLink]="['/categories']">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

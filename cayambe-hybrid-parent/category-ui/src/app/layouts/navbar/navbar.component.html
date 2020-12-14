@@ -1,0 +1,24 @@
+<nav class="navbar navbar-dark navbar-expand-lg bg-primary">
+  <a class="navbar-brand" routerLink="/" (click)="collapseNavbar()">Cayambe Categories</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNavbar()">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item dropdown" ngbDropdown>
+        <a class="nav-link dropdown-toggle" ngbDropdownToggle role="button" (click)="false">
+          <fa-icon icon="user-circle" size="lg"></fa-icon>
+        </a>
+        <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right">
+          <div ngbDropdownItem >
+            <div class="font-weight-bold" role="menuitem">{{ (user$ | async)?.firstName }} {{ (user$ | async)?.lastName }}</div>
+            <small class="text-secondary" role="menuitem">{{ (user$ | async)?.username }}</small>
+          </div>
+          <div class="divider dropdown-divider"></div>
+          <a ngbDropdownItem  (click)="doLogout()"class="dropdown-item" style="cursor: pointer;">Logout</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>

@@ -1,6 +1,6 @@
 # Monolith To Microservices
 
-This is the source code for my article [Maintaining Legacy Applications - Part Two](https://www.linkedin.com/pulse/maintaining-legacy-applications-part-2-jannie-louwrens/).
+This is the source code for my article [Maintaining Legacy Applications - Part Two](https://www.linkedin.com/pulse/maintaining-legacy-applications-part-two-jannie-louwrens/).
 
 ## Requirements
 
